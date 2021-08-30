@@ -16,9 +16,16 @@ body {
 
 h1 {
     margin: 1em;
+    margin-bottom: 0.5em;
+}
+
+.description {
+    padding: 0.5em;
+    font-size: large;
 }
 
 #input-div {
+    margin-top: 1em;
     font-size: larger;
 }
 

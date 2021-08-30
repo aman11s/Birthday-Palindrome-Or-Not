@@ -65,6 +65,10 @@ input {
     padding: 1em; 
 }
 
+#previous-palindrome-msg {
+    margin-bottom: 10em;
+}
+
 .list-item-inline {
     display: inline-block;
 }

@@ -51,6 +51,7 @@ input {
     margin: auto;
     margin-top: 1em;
     max-width: 80vw;
+    margin-bottom: 10em;
 }
 
 .msg {

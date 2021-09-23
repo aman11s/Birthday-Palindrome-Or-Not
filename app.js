@@ -185,42 +185,45 @@ meme.style.display = "none";
 
 function clickHandler() {
 
-    meme.style.display = "block";
-    message.style.display = "none";
-    nextPalindromeMessage.style.display = "none";
-    previousPalindromeMessage.style.display = "none";
+    if (dob.value === "") {
+        message.innerText = "Please select birthdate";
+        message.style.color = "red";
+    } else {
+        meme.style.display = "block";
+        message.style.display = "none";
+        nextPalindromeMessage.style.display = "none";
+        previousPalindromeMessage.style.display = "none";
+        setTimeout(() => {
 
-    setTimeout(() => {
+            meme.style.display = "none";
 
-        meme.style.display = "none";
+            let dobValue = dob.value.split('-');
+            let date = {
+                day: Number(dobValue[2]),
+                month: Number(dobValue[1]),
+                year: Number(dobValue[0])
+            };
 
-        let dobValue = dob.value.split('-');
-        let date = {
-            day: Number(dobValue[2]),
-            month: Number(dobValue[1]),
-            year: Number(dobValue[0])
-        };
+            if (checkPalindromeForAllDateFormats(date)) {
+                message.style.display = "block";
+                message.style.color = "green";
+                message.innerText = "Congrats!! your Birthday is a Palindrome 🥳";
+                nextPalindromeMessage.style.display = "none";
+                previousPalindromeMessage.style.display = "none";
+            } else {
+                message.style.display = "block";
+                message.style.color = "red";
+                message.innerText = "Opps! your Birthday is not a palindrome 😐";
+                let [count, nextDate] = nextPalindromeDate(date);
+                let [ctr, previousDate] = previousPalindromeDate(date);
+                nextPalindromeMessage.style.display = "block";
+                previousPalindromeMessage.style.display = "block";
+                nextPalindromeMessage.innerText = `👉 Next Palindrome date is ${nextDate.day}-${nextDate.month}-${nextDate.year}, you missed it by ${count} days.`;
+                previousPalindromeMessage.innerText = `👉 Previous Palindrome date is ${previousDate.day}-${previousDate.month}-${previousDate.year}, you missed it by ${ctr} days.`;
+            }
 
-        if (checkPalindromeForAllDateFormats(date)) {
-            message.style.display = "block";
-            message.style.color = "green";
-            message.innerText = "Congrats!! your Birthday is a Palindrome 🥳";
-            nextPalindromeMessage.style.display = "none";
-            previousPalindromeMessage.style.display = "none";
-        } else {
-            message.style.display = "block";
-            message.style.color = "red";
-            message.innerText = "Opps! your Birthday is not a palindrome 😐";
-            let [count, nextDate] = nextPalindromeDate(date);
-            let [ctr, previousDate] = previousPalindromeDate(date);
-            nextPalindromeMessage.style.display = "block";
-            previousPalindromeMessage.style.display = "block";
-            nextPalindromeMessage.innerText = `👉 Next Palindrome date is ${nextDate.day}-${nextDate.month}-${nextDate.year}, you missed it by ${count} days.`;
-            previousPalindromeMessage.innerText = `👉 Previous Palindrome date is ${previousDate.day}-${previousDate.month}-${previousDate.year}, you missed it by ${ctr} days.`;
-        }
-
-    }, 4000)
-
+        }, 3000)
+    }
 }
 
 checkButton.addEventListener('click', clickHandler);
